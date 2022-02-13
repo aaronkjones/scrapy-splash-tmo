@@ -1,0 +1,18 @@
+version: '3'
+services:
+  scrape:
+    container_name: tmo-scrape
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - splash
+    volumes:
+      - ${PWD}/data:/data
+  splash:
+    container_name: splash
+    ports:
+      - 8050:8050
+    image: scrapinghub/splash
+    command: --disable-private-mode 
+    restart: always
